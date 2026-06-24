@@ -17,11 +17,40 @@ export function Checkout() {
     email: '',
     firstName: '',
     lastName: '',
+    phone: '',
+    countryCode: '+1',
     address: '',
     city: '',
     postalCode: '',
     country: 'US',
   });
+
+  const countryCodes = [
+    { code: '+1', country: 'US/CA', flag: '🇺🇸' },
+    { code: '+44', country: 'UK', flag: '🇬🇧' },
+    { code: '+61', country: 'AU', flag: '🇦🇺' },
+    { code: '+65', country: 'SG', flag: '🇸🇬' },
+    { code: '+86', country: 'CN', flag: '🇨🇳' },
+    { code: '+81', country: 'JP', flag: '🇯🇵' },
+    { code: '+82', country: 'KR', flag: '🇰🇷' },
+    { code: '+49', country: 'DE', flag: '🇩🇪' },
+    { code: '+33', country: 'FR', flag: '🇫🇷' },
+    { code: '+39', country: 'IT', flag: '🇮🇹' },
+    { code: '+34', country: 'ES', flag: '🇪🇸' },
+    { code: '+31', country: 'NL', flag: '🇳🇱' },
+    { code: '+91', country: 'IN', flag: '🇮🇳' },
+    { code: '+7', country: 'RU', flag: '🇷🇺' },
+    { code: '+55', country: 'BR', flag: '🇧🇷' },
+    { code: '+52', country: 'MX', flag: '🇲🇽' },
+    { code: '+971', country: 'AE', flag: '🇦🇪' },
+    { code: '+852', country: 'HK', flag: '🇭🇰' },
+    { code: '+886', country: 'TW', flag: '🇹🇼' },
+    { code: '+62', country: 'ID', flag: '🇮🇩' },
+    { code: '+60', country: 'MY', flag: '🇲🇾' },
+    { code: '+66', country: 'TH', flag: '🇹🇭' },
+    { code: '+84', country: 'VN', flag: '🇻🇳' },
+    { code: '+63', country: 'PH', flag: '🇵🇭' },
+  ];
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -127,6 +156,33 @@ export function Checkout() {
                       name="lastName"
                       value={formData.lastName}
                       onChange={handleInputChange}
+                      required
+                    />
+                  </div>
+                </div>
+                <div>
+                  <Label htmlFor="phone">Phone Number</Label>
+                  <div className="flex gap-2">
+                    <select
+                      name="countryCode"
+                      value={formData.countryCode}
+                      onChange={(e) => setFormData(prev => ({ ...prev, countryCode: e.target.value }))}
+                      className="w-32 px-3 py-2 border rounded-md bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+                    >
+                      {countryCodes.map((item) => (
+                        <option key={item.code} value={item.code}>
+                          {item.flag} {item.code} ({item.country})
+                        </option>
+                      ))}
+                    </select>
+                    <Input
+                      id="phone"
+                      name="phone"
+                      type="tel"
+                      value={formData.phone}
+                      onChange={handleInputChange}
+                      placeholder="Phone number"
+                      className="flex-1"
                       required
                     />
                   </div>
